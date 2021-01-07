@@ -4,15 +4,26 @@
 /// Learn more about FRAME and the core library of Substrate FRAME pallets:
 /// https://substrate.dev/docs/en/knowledgebase/runtime/frame
 
-use frame_support::{decl_module, decl_storage, decl_event, decl_error, ensure, dispatch::{DispatchResult}};
+use frame_support::{decl_module, decl_storage, decl_event, decl_error, ensure, dispatch::{DispatchResult}, 
+	traits::{Get}};
 use frame_system::{self as system, ensure_signed};
 
 use sp_std::vec::Vec;
+
+#[cfg(test)]
+mod mock;
+
+#[cfg(test)]
+mod tests;
 
 /// Configure the pallet by specifying the parameters and types on which it depends.
 pub trait Trait: frame_system::Trait {
 	/// Because this pallet emits events, it depends on the runtime's definition of an event.
 	type Event: From<Event<Self>> + Into<<Self as frame_system::Trait>::Event>;
+
+	type ClaimMinLength: Get<usize>;
+
+	type ClaimMaxLength: Get<usize>;
 }
 
 // The pallet's runtime storage items.
@@ -22,7 +33,7 @@ decl_storage! {
 	// This name may be updated, but each pallet in the runtime must use a unique name.
 	// ---------------------------------vvvvvvvvvvvvvv
 	trait Store for Module<T: Trait> as TemplateModule {
-		Proofs get(fn proof): map hasher(twox_64_concat) Vec<u8> => (T::AccountId, T::BlockNumber);
+		Proofs get(fn proof): map hasher(blake2_128_concat) Vec<u8> => (T::AccountId, T::BlockNumber);
 	}
 }
 
@@ -39,9 +50,11 @@ decl_event!(
 // Errors inform users that something went wrong.
 decl_error! {
 	pub enum Error for Module<T: Trait> {
-		DuplicateClaim,
+		ClaimAlreadyExist,
 		ClaimNotExist,
 		NotClaimOwner,
+		ClaimTooShort,
+		ClaimTooLong,
 	}
 }
 
@@ -56,11 +69,17 @@ decl_module! {
 		// Events must be initialized if they are used by the pallet.
 		fn deposit_event() = default;
 
+		const ClaimMinLength: u32 = T::ClaimMinLength::get() as u32;
+
+		const ClaimMaxLength: u32 = T::ClaimMaxLength::get() as u32;
+
 		#[weight = 0]
 		pub fn create_claim(origin, claim: Vec<u8>) -> DispatchResult {
 			let sender = ensure_signed(origin)?;
 
-			ensure!(!Proofs::<T>::contains_key(&claim), Error::<T>::DuplicateClaim);
+			ensure!(claim.len() >= T::ClaimMinLength::get(), Error::<T>::ClaimTooShort);
+			ensure!(claim.len() <= T::ClaimMaxLength::get(), Error::<T>::ClaimTooLong);
+			ensure!(!Proofs::<T>::contains_key(&claim), Error::<T>::ClaimAlreadyExist);
 
 			Proofs::<T>::insert(&claim, (sender.clone(), system::Module::<T>::block_number()));
 
