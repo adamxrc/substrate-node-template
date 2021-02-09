@@ -3277,8 +3277,8 @@ dependencies = [
  "hex-literal",
  "pallet-aura",
  "pallet-balances",
+ "pallet-benchmark-demo",
  "pallet-grandpa",
- "pallet-kitties",
  "pallet-poe",
  "pallet-randomness-collective-flip",
  "pallet-sudo",
@@ -3451,9 +3451,9 @@ dependencies = [
 
 [[package]]
 name = "pallet-aura"
-version = "2.0.0"
+version = "2.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3150af311603b2fd78d948c8e2346d6b2530403c3971ae684ccc46021c1ea198"
+checksum = "8df67bf96a70cecc2c60989381bc3d21172cdb7534c187c20953f4594736a8ac"
 dependencies = [
  "frame-support",
  "frame-system",
@@ -3501,6 +3501,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "pallet-benchmark-demo"
+version = "2.0.0"
+dependencies = [
+ "frame-benchmarking",
+ "frame-support",
+ "frame-system",
+ "parity-scale-codec",
+ "sp-std",
+]
+
+[[package]]
 name = "pallet-finality-tracker"
 version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3537,21 +3548,6 @@ dependencies = [
  "sp-runtime",
  "sp-session",
  "sp-staking",
- "sp-std",
-]
-
-[[package]]
-name = "pallet-kitties"
-version = "2.0.0"
-dependencies = [
- "frame-support",
- "frame-system",
- "pallet-balances",
- "pallet-randomness-collective-flip",
- "parity-scale-codec",
- "sp-core",
- "sp-io",
- "sp-runtime",
  "sp-std",
 ]
 
@@ -4938,9 +4934,9 @@ dependencies = [
 
 [[package]]
 name = "sc-consensus-aura"
-version = "0.8.0"
+version = "0.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e0b4fbf217f3942ae545ad70cd5b5d567b4519b9acb07b35e0de5cce7e7ef195"
+checksum = "9c167e1adb19207b6c5c4c137e0ec1199fc92022c8bbe3c020c55195301bff8a"
 dependencies = [
  "derive_more",
  "futures 0.3.5",
@@ -6067,9 +6063,9 @@ dependencies = [
 
 [[package]]
 name = "sp-consensus-aura"
-version = "0.8.0"
+version = "0.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8dc270d5c9c74960f44be4fe3e2e04886edf6a4a6fa85a57d381b242ce8b41e0"
+checksum = "e0b7eb31572227860f091208fe1185482ce2d722bde3a405e0c5e0cc095aa0ff"
 dependencies = [
  "parity-scale-codec",
  "sp-api",
