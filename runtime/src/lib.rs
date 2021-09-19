@@ -280,7 +280,7 @@ impl pallet_template::Config for Runtime {
 }
 
 parameter_types! {
-	pub const LenLimit: u32 = 5;
+	pub const LenLimit: u32 = 1000_000;
 }
 
 impl pallet_poe::Config for Runtime {

@@ -32,12 +32,7 @@ pub mod pallet {
 
 	#[pallet::storage]
 	#[pallet::getter(fn proofs)]
-	pub type Proofs<T: Config> = StorageMap<
-		_,
-		Blake2_128Concat,
-		Vec<u8>,
-		(T::AccountId, T::BlockNumber)
-	>;
+	pub type Proofs<T: Config> = StorageMap<_, Blake2_128Concat, Vec<u8>, (T::AccountId, T::BlockNumber), ValueQuery>;
 
 	#[pallet::event]
 	#[pallet::metadata(T::AccountId = "AccountId")]
@@ -60,7 +55,7 @@ pub mod pallet {
 
 	#[pallet::call]
 	impl<T: Config> Pallet<T> {
-		#[pallet::weight(0)]
+		#[pallet::weight(1_000)]
 		pub fn create_claim(origin: OriginFor<T>, claim: Vec<u8>) -> DispatchResultWithPostInfo {
 			ensure!(claim.len() <= T::LenLimit::get() as usize, Error::<T>::LenLimitOver);
 
@@ -68,20 +63,20 @@ pub mod pallet {
 
 			ensure!(!Proofs::<T>::contains_key(&claim), Error::<T>::ProofAlreadyExist);
 
-			Proofs::<T>::insert(&claim, (sender.clone(), frame_system::Pallet::<T>::block_number()));
+			Proofs::<T>::insert(&claim, (&sender, frame_system::Pallet::<T>::block_number()));
 
 			Self::deposit_event(Event::ClaimCreated(sender, claim));
 
 			Ok(().into())
 		}
 
-		#[pallet::weight(0)]
+		#[pallet::weight(10_000)]
 		pub fn revoke_claim(origin: OriginFor<T>, claim: Vec<u8>) -> DispatchResultWithPostInfo {
 			ensure!(claim.len() <= T::LenLimit::get() as usize, Error::<T>::LenLimitOver);
 
 			let sender = ensure_signed(origin)?;
 
-			let (owner, _) = Proofs::<T>::get(&claim).ok_or(Error::<T>::ClaimNotExist)?;
+			let (owner, _) = Proofs::<T>::get(&claim);
 
 			ensure!(owner == sender, Error::<T>::NotClaimOwner);
 
@@ -98,7 +93,7 @@ pub mod pallet {
 
 			let sender = ensure_signed(origin)?;
 
-			let (owner, _block_number) = Proofs::<T>::get(&claim).ok_or(Error::<T>::ClaimNotExist)?;
+			let (owner, _block_number) = Proofs::<T>::get(&claim);
 
 			ensure!(owner == sender, Error::<T>::NotClaimOwner);
 

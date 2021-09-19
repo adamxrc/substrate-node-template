@@ -222,7 +222,7 @@ pub mod pallet {
 		/// so the code should be able to handle that.
 		/// You can use `Local Storage` API to coordinate runs of the worker.
 		fn offchain_worker(block_number: T::BlockNumber) {
-			log::info!("Hello World from offchain workers!");
+			/*log::info!("Hello World from offchain workers!");
 
 			// Here we are showcasing various techniques used when running off-chain workers (ocw)
 			// 1. Sending signed transaction from ocw
@@ -246,7 +246,7 @@ pub mod pallet {
 
 			if let Err(e) = result {
 				log::error!("offchain_worker error: {:?}", e);
-			}
+			}*/
 		}
 	}
 
