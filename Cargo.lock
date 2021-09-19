@@ -3540,6 +3540,7 @@ dependencies = [
  "sp-consensus-aura",
  "sp-core",
  "sp-finality-grandpa",
+ "sp-keystore",
  "sp-runtime",
  "sp-timestamp",
  "structopt",
@@ -3558,10 +3559,12 @@ dependencies = [
  "frame-system-benchmarking",
  "frame-system-rpc-runtime-api",
  "hex-literal",
+ "log",
  "pallet-aura",
  "pallet-balances",
  "pallet-grandpa",
  "pallet-kitties",
+ "pallet-ocw",
  "pallet-poe",
  "pallet-randomness-collective-flip",
  "pallet-sudo",
@@ -3823,6 +3826,24 @@ dependencies = [
  "sp-core",
  "sp-io",
  "sp-runtime",
+]
+
+[[package]]
+name = "pallet-ocw"
+version = "3.0.0-monthly-2021-09+1"
+dependencies = [
+ "frame-support",
+ "frame-system",
+ "log",
+ "parity-scale-codec",
+ "parking_lot 0.11.2",
+ "serde",
+ "serde_json",
+ "sp-arithmetic",
+ "sp-core",
+ "sp-io",
+ "sp-runtime",
+ "sp-std",
 ]
 
 [[package]]
