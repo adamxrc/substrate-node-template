@@ -1,0 +1,49 @@
+Pallet: "pallet_balances", Extrinsic: "transfer", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+extrinsic_time_ns,storage_root_time_ns,reads,repeat_reads,writes,repeat_writes,proof_size_bytes
+135000,5000,0,0,0,0,0
+131000,4000,0,0,0,0,0
+130000,4000,0,0,0,0,0
+130000,4000,0,0,0,0,0
+147000,4000,0,0,0,0,0
+136000,5000,0,0,0,0,0
+137000,4000,0,0,0,0,0
+139000,4000,0,0,0,0,0
+129000,4000,0,0,0,0,0
+129000,5000,0,0,0,0,0
+130000,4000,0,0,0,0,0
+129000,4000,0,0,0,0,0
+128000,4000,0,0,0,0,0
+128000,4000,0,0,0,0,0
+129000,4000,0,0,0,0,0
+127000,5000,0,0,0,0,0
+130000,4000,0,0,0,0,0
+129000,4000,0,0,0,0,0
+129000,4000,0,0,0,0,0
+128000,5000,0,0,0,0,0
+
+Raw Storage Info
+========
+Storage: System Account (r:1 w:1)
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=      130
+              µs
+
+Reads = 1
+Writes = 1
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=      130
+              µs
+
+Reads = 1
+Writes = 1
+

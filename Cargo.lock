@@ -3562,6 +3562,7 @@ dependencies = [
  "log",
  "pallet-aura",
  "pallet-balances",
+ "pallet-benchmark-demo",
  "pallet-grandpa",
  "pallet-kitties",
  "pallet-ocw",
@@ -3788,6 +3789,17 @@ dependencies = [
  "log",
  "parity-scale-codec",
  "sp-runtime",
+ "sp-std",
+]
+
+[[package]]
+name = "pallet-benchmark-demo"
+version = "3.0.0-monthly-2021-09+1"
+dependencies = [
+ "frame-benchmarking",
+ "frame-support",
+ "frame-system",
+ "parity-scale-codec",
  "sp-std",
 ]
 

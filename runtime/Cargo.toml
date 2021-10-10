@@ -31,6 +31,11 @@ default-features = false
 path = '../pallets/ocw'
 version = '3.0.0-monthly-2021-09+1'
 
+[dependencies.pallet-benchmark-demo]
+default-features = false
+path = '../pallets/benchmark-demo'
+version = '3.0.0-monthly-2021-09+1'
+
 [build-dependencies.substrate-wasm-builder]
 git = 'https://github.com/paritytech/substrate.git'
 tag = 'monthly-2021-09+1'
@@ -213,6 +218,7 @@ runtime-benchmarks = [
     'pallet-balances/runtime-benchmarks',
     'pallet-template/runtime-benchmarks',
     'pallet-timestamp/runtime-benchmarks',
+    'pallet-benchmark-demo/runtime-benchmarks',
     'sp-runtime/runtime-benchmarks',
 ]
 std = [
@@ -229,6 +235,8 @@ std = [
     'pallet-template/std',
     'pallet-poe/std',
     'pallet-kitties/std',
+    'pallet-ocw/std',
+    'pallet-benchmark-demo/std',
     'pallet-timestamp/std',
     'pallet-transaction-payment-rpc-runtime-api/std',
     'pallet-transaction-payment/std',
